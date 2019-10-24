@@ -127,8 +127,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationModule.cs" />
+    <Compile Include="Interfaces\IArchiveBuilder.cs" />
+    <Compile Include="Interfaces\IDirectoryScanner.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Interfaces\IPreferences.cs" />
+    <Compile Include="Interfaces\ISetCreator.cs" />
+    <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\ArchiveBuilder.cs" />
+    <Compile Include="Models\DirectoryScanner.cs" />
+    <Compile Include="Models\SetCreator.cs" />
     <Compile Include="Platform\JsonObjectWriter.cs" />
     <Compile Include="Platform\PreferencesManager.cs" />
     <Compile Include="Properties\ApplicationConstants.cs" />
@@ -139,7 +146,11 @@
     <Compile Include="Properties\GlobalAssemblyInfo.cs" />
     <Compile Include="Support\BindingErrorListener.cs" />
     <Compile Include="Support\WindowPlacement.cs" />
+    <Compile Include="ViewModels\ArchiveCreatorViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\ArchiveCreatorView.xaml.cs">
+      <DependentUpon>ArchiveCreatorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -147,6 +158,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ArchiveCreatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Shell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Prism.Ioc;
-using Prism.Modularity;
 using TuneArchiver.Interfaces;
 using TuneArchiver.Views;
 
@@ -34,13 +33,11 @@ namespace TuneArchiver {
 #endif
         }
 
-        protected override void ConfigureModuleCatalog( IModuleCatalog moduleCatalog ) {
-            base.ConfigureModuleCatalog( moduleCatalog );
+        protected override void RegisterTypes( IContainerRegistry containerRegistry ) {
+            var module = new ApplicationModule();
 
-            moduleCatalog.AddModule( typeof( ApplicationModule ));
+            module.RegisterTypes( containerRegistry );
         }
-
-        protected override void RegisterTypes( IContainerRegistry containerRegistry ) { }
 
         protected override Window CreateShell() {
             var retValue = Container.Resolve<Shell>();

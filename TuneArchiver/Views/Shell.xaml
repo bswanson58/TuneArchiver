@@ -3,9 +3,10 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:Mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:Mvvm="http://prismlibrary.com/"
+                 xmlns:Views="clr-namespace:TuneArchiver.Views"
                  Mvvm:ViewModelLocator.AutoWireViewModel="True"
                  ResizeMode="CanResizeWithGrip"
-                 Title="Shell" >
+                 Title="Tune Archivist" >
 
     <Mah:MetroWindow.RightWindowCommands>
         <Mah:WindowCommands>
@@ -14,7 +15,7 @@
     </Mah:MetroWindow.RightWindowCommands>
 
     <Grid>
-
+        <Views:ArchiveCreatorView/>
     </Grid>
 </Mah:MetroWindow>
 
