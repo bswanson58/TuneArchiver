@@ -1,30 +1,36 @@
-﻿using TuneArchiver.Interfaces;
+﻿using System.Collections.Generic;
+using System.IO;
+using Recls;
+using TuneArchiver.Interfaces;
+using TuneArchiver.Support;
 
 namespace TuneArchiver.Models {
     class DirectoryScanner : IDirectoryScanner {
 
-    }
-    
-    static class DirectoryInfoEx {
-        public static long GetDirectorySize( this System.IO.DirectoryInfo directoryInfo, bool recursive = true ) {
-            var startDirectorySize = default( long );
+        public IEnumerable<Album> ScanStagingArea() {
+            return ScanStagingDirectory( @"D:\Music" );
+        }
 
-            if(( directoryInfo == null ) ||
-               (!directoryInfo.Exists )) {
-                return startDirectorySize; //Return 0 while Directory does not exist.
-            }
+        private IEnumerable<Album> ScanStagingDirectory( string rootPath ) {
+            var retValue = new List<Album>();
+            var directories = FileSearcher.Search( rootPath, null, SearchOptions.Directories, 0 );
 
-            //Add size of files in the Current Directory to main size.
-            foreach( var fileInfo in directoryInfo.GetFiles()) {
-                System.Threading.Interlocked.Add( ref startDirectorySize, fileInfo.Length );
-            }
+            directories.ForEach( directory => ScanDirectory( retValue, directory.FileName, directory.Path ));
 
-            if( recursive ) { //Loop on Sub Directories in the Current Directory and Calculate it's files size.
-                System.Threading.Tasks.Parallel.ForEach( directoryInfo.GetDirectories(), subDirectory =>
-                    System.Threading.Interlocked.Add( ref startDirectorySize, GetDirectorySize( subDirectory, recursive )));
-            }
+            return retValue;
+        }
 
-            return startDirectorySize;  //Return full Size of this Directory.
+        private void ScanDirectory( IList<Album> directoryList, string name, string path ) {
+            var directories = FileSearcher.Search( path, null, SearchOptions.Directories, 0 );
+
+            directories.ForEach( directory => { directoryList.Add( CollectDirectory( name, directory.FileName, directory.Path )); });
+        }
+
+        private Album CollectDirectory( string artist, string album, string path ) {
+            var dirInfo = new DirectoryInfo( path );
+
+            return new Album( artist, album, path, dirInfo.GetDirectorySize());
         }
     }
+   
 }

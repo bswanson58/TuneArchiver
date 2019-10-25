@@ -67,6 +67,9 @@
     <Reference Include="Prism.Wpf, Version=7.1.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.7.1.0.123-pre\lib\net45\Prism.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="recls.NET.Core, Version=2.3.1110.1, Culture=neutral, PublicKeyToken=10fae791631c5716, processorArchitecture=MSIL">
+      <HintPath>..\packages\recls.NET.2.3.1110.1\lib\net40\recls.NET.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.7.1\lib\net46\Serilog.dll</HintPath>
     </Reference>
@@ -145,6 +148,7 @@
     <Compile Include="Platform\OperatingEnvironment.cs" />
     <Compile Include="Properties\GlobalAssemblyInfo.cs" />
     <Compile Include="Support\BindingErrorListener.cs" />
+    <Compile Include="Support\DirectoryInfoEx.cs" />
     <Compile Include="Support\WindowPlacement.cs" />
     <Compile Include="ViewModels\ArchiveCreatorViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -194,6 +198,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ReusableBits.Mvvm\ReusableBits.Mvvm.csproj">
+      <Project>{8930138b-f96a-4a56-84cf-d660730989c9}</Project>
+      <Name>ReusableBits.Mvvm</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
